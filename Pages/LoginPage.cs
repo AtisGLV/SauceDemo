@@ -34,8 +34,10 @@ namespace SwagLabsDemo.Pages
         // Predefined logins
         public async Task LogInAsStandardUser()
         {
-            var username = Environment.GetEnvironmentVariable("SAUCE_USERNAME");
-            var password = Environment.GetEnvironmentVariable("SAUCE_PASSWORD");
+            var username = Environment.GetEnvironmentVariable("SAUCE_USERNAME") ?? "standard_user";
+            var password = Environment.GetEnvironmentVariable("SAUCE_PASSWORD") ?? "secret_sauce";
+
+            await LogIn(username, password);
         }
 
         public async Task LogInAsLockedOutUser()
