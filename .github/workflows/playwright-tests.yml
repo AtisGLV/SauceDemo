@@ -1,55 +1,55 @@
-name: Playwright C# Tests
+  name: Playwright C# Tests
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:  # allows manual run from Actions tab
-      inputs:
-        SAUCE_USERNAME:
-         description: 'SauceLabs username'
-         required: true
-        SAUCE_PASSWORD:
-          description: 'SauceLabs password'
-          required: true
+  on:
+    push:
+      branches: [ main ]
+    workflow_dispatch:  # allows manual run from Actions tab
+        inputs:
+          SAUCE_USERNAME:
+            description: 'SauceLabs username'
+            required: true
+          SAUCE_PASSWORD:
+            description: 'SauceLabs password'
+            required: true
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  jobs:
+    build-and-test:
+      runs-on: ubuntu-latest
 
-    steps:
-      # 1. Checkout code
-      - name: Checkout
-        uses: actions/checkout@v3
+      steps:
+        # 1. Checkout code
+        - name: Checkout
+          uses: actions/checkout@v3
 
-      # 2. Setup .NET SDK
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0.x'
+        # 2. Setup .NET SDK
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: '7.0.x'
 
-      # 3. Restore NuGet packages
-      - name: Restore
-        run: dotnet restore
+        # 3. Restore NuGet packages
+        - name: Restore
+          run: dotnet restore
 
-      # 4. Build project
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+        # 4. Build project
+        - name: Build
+          run: dotnet build --configuration Release --no-restore
 
-      # 5. Install Playwright CLI globally
-      - name: Install Playwright CLI
-        run: dotnet tool install --global Microsoft.Playwright.CLI
+        # 5. Install Playwright CLI globally
+        - name: Install Playwright CLI
+          run: dotnet tool install --global Microsoft.Playwright.CLI
 
-      # 6. Add .NET global tools folder to PATH
-      - name: Add .NET tools to PATH
-        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+        # 6. Add .NET global tools folder to PATH
+        - name: Add .NET tools to PATH
+          run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
-      # 7. Install Playwright browsers
-      - name: Install Playwright browsers
-        run: playwright install --with-deps
+        # 7. Install Playwright browsers
+        - name: Install Playwright browsers
+          run: playwright install --with-deps
 
-      # 8. Run tests
-      - name: Run tests
-        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
-        env:
-          SAUCE_USERNAME: ${{ github.event.inputs.SAUCE_USERNAME }}
-          SAUCE_PASSWORD: ${{ github.event.inputs.SAUCE_PASSWORD }}
+        # 8. Run tests
+        - name: Run tests
+          run: dotnet test --configuration Release --no-build  
+          env:
+            SAUCE_USERNAME: ${{ github.event.inputs.SAUCE_USERNAME || secrets.SAUCE_USERNAME }}
+            SAUCE_PASSWORD: ${{ github.event.inputs.SAUCE_PASSWORD || secrets.SAUCE_PASSWORD }}
