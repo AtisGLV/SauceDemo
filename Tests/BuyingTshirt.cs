@@ -9,7 +9,7 @@ namespace SwagLabsDemo
         public async Task Shirtbuy()
         {
             using var playwright = await Playwright.CreateAsync();
-            await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
+            await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
             var page = await browser.NewPageAsync();
             var loginPage = new LoginPage(page);
             var homePage = new HomePage(page);
