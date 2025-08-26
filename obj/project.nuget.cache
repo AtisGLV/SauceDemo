@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eGj6zjjRIpDhNV3rt6QruW3ifTKAmtCHRqCa078WBmsvkitmkXQo82EzSJdls4JEDzPZpnHSya1KRkVktegrSw==",
+  "dgSpecHash": "nAnmqwmE38lOeJuynJs4RBgSSbAIIx4+BZkYzwKBk+m7f/P/x0NBVEmfKwT/aVSxNKud4qaYM4fX2TTnksNaOQ==",
   "success": true,
-  "projectFilePath": "d:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
+  "projectFilePath": "D:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Protagonist\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",
     "C:\\Users\\Protagonist\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
