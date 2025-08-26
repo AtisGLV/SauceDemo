@@ -1,0 +1,46 @@
+name: Playwright C# Tests
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:   # allows manual run from Actions tab
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Install Playwright CLI tool
+        run: |
+          dotnet tool install --global Microsoft.Playwright.CLI
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Install Playwright browsers and dependencies
+        run: playwright install --with-deps
+
+      - name: Build (Release)
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/TestResults/*.trx'
