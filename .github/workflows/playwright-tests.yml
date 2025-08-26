@@ -1,37 +1,48 @@
-name: .NET Playwright Tests
+name: Playwright C# Tests
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+  workflow_dispatch:  # allows manual run from Actions tab
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      # 1. Checkout code
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '7.0.x'
+      # 2. Setup .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+      # 3. Restore NuGet packages
+      - name: Restore
+        run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+      # 4. Build project
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Install Playwright CLI globally
-      run: dotnet tool install --global Microsoft.Playwright.CLI
+      # 5. Install Playwright CLI globally
+      - name: Install Playwright CLI
+        run: dotnet tool install --global Microsoft.Playwright.CLI
 
-    - name: Install Playwright Browsers
-      run: dotnet tool run playwright install --with-deps
+      # 6. Add .NET global tools folder to PATH
+      - name: Add .NET tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
-    - name: Add .NET tools to PATH
-      run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+      # 7. Install Playwright browsers
+      - name: Install Playwright browsers
+        run: playwright install --with-deps
 
-    - name: Run tests
-      run: dotnet test --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
+      # 8. Run tests
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
