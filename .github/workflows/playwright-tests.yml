@@ -5,12 +5,12 @@ on:
     branches: [ main ]
   workflow_dispatch:  # allows manual run from Actions tab
       inputs:
-      SAUCE_USERNAME:
-        description: 'SauceLabs username'
-        required: true
-      SAUCE_PASSWORD:
-        description: 'SauceLabs password'
-        required: true
+        SAUCE_USERNAME:
+         description: 'SauceLabs username'
+         required: true
+        SAUCE_PASSWORD:
+          description: 'SauceLabs password'
+          required: true
 
 jobs:
   build-and-test:
