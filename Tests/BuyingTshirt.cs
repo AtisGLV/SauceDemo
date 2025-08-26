@@ -23,7 +23,7 @@ namespace SwagLabsDemo
             await loginPage.GoToWebsite();
             await loginPage.LogInAsStandardUser();
 
-            //Choose right item and go to checkout
+            //Choose right item and go to checkout 
             await homePage.GoToItemTshirt();
             await itemPage.AddToCart();
             await homePage.GoToShoppingCart();
