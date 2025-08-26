@@ -30,5 +30,8 @@ jobs:
     - name: Install Playwright Browsers
       run: dotnet tool run playwright install --with-deps
 
+    - name: Add .NET tools to PATH
+      run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
     - name: Run tests
       run: dotnet test --logger "trx;LogFileName=test_results.trx" --results-directory TestResults
