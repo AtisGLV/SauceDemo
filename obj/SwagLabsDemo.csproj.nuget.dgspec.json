@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj": {}
+    "d:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj": {}
   },
   "projects": {
-    "D:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj": {
+    "d:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
+        "projectUniqueName": "d:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
         "projectName": "SwagLabsDemo",
-        "projectPath": "D:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
+        "projectPath": "d:\\Code\\SwagLabs\\SwagLabsDemo\\SwagLabsDemo.csproj",
         "packagesPath": "C:\\Users\\Protagonist\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\SwagLabs\\SwagLabsDemo\\obj\\",
+        "outputPath": "d:\\Code\\SwagLabs\\SwagLabsDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Protagonist\\AppData\\Roaming\\NuGet\\NuGet.Config",
